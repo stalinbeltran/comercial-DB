@@ -1,4 +1,4 @@
--- ventas_por_periodo(%s=fecha_desde, %s=fecha_hasta, %s=id_sucursal)
+-- ventas_por_periodo(fecha_desde DATE, fecha_hasta DATE, id_sucursal INT)
 -- Pasa NULL en id_sucursal para todas las sucursales
 SELECT
     f.id                                                AS id_factura,

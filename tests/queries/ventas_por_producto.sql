@@ -1,4 +1,4 @@
--- ventas_por_producto(%s=fecha_desde, %s=fecha_hasta)
+-- ventas_por_producto(fecha_desde DATE, fecha_hasta DATE)
 SELECT
     p.id                                                    AS id_producto,
     p.codigo                                                AS codigo_producto,

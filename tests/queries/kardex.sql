@@ -1,4 +1,4 @@
--- kardex(%s=id_producto, %s=id_bodega, %s=fecha_desde, %s=fecha_hasta)
+-- kardex(id_producto INT, id_bodega INT, fecha_desde DATE, fecha_hasta DATE)
 SELECT
     mi.created_at        AS fecha,
     mi.tipo_movimiento,

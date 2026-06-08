@@ -1,4 +1,4 @@
--- compras_por_proveedor(%s=fecha_desde, %s=fecha_hasta)
+-- compras_por_proveedor(fecha_desde DATE, fecha_hasta DATE)
 SELECT
     t.id                    AS id_proveedor,
     t.razon_social          AS proveedor,

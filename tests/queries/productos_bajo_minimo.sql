@@ -1,4 +1,4 @@
--- productos_bajo_minimo(%s=id_bodega)
+-- productos_bajo_minimo(id_bodega INT)
 SELECT
     p.id            AS id_producto,
     p.codigo        AS codigo_producto,

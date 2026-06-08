@@ -1,5 +1,5 @@
--- cuentas_por_cobrar(%s=fecha_corte)
--- Retorna facturas con saldo > 0 y su antigüedad en días al %s=fecha_corte
+-- cuentas_por_cobrar(fecha_corte DATE)
+-- Retorna facturas con saldo > 0 y su antigüedad en días a la fecha_corte
 SELECT
     f.id                                                        AS id_factura,
     f.numero,

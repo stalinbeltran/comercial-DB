@@ -1,4 +1,4 @@
--- top_productos_vendidos(%s=fecha_desde, %s=fecha_hasta, %s=limite)
+-- top_productos_vendidos(fecha_desde DATE, fecha_hasta DATE, limite INT)
 SELECT
     p.id            AS id_producto,
     p.codigo        AS codigo_producto,

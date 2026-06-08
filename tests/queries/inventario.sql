@@ -1,5 +1,4 @@
--- stock_por_bodega(%s=id_bodega)
--- Parámetro 1: id_bodega (INT)
+-- stock_por_bodega(id_bodega INT)
 SELECT
     p.id                                        AS id_producto,
     p.codigo                                    AS codigo_producto,

@@ -24,7 +24,7 @@ def seed_cxc(db_connection, seed_base, seed_terceros):
       F-VIG  vence 2025-03-15  saldo=500  → vigente (no vencida)
       F-030  vence 2025-02-10  saldo=200  → 1-30 días (19 días al 2025-03-01)
       F-060  vence 2025-01-20  saldo=300  → 31-60 días (40 días al 2025-03-01)
-      F-090  vence 2024-12-31  saldo=400  → 61-90 días (60 días al 2025-03-01)
+      F-090  vence 2024-12-30  saldo=400  → 61-90 días (61 días al 2025-03-01)
       F-MAS  vence 2024-11-01  saldo=100  → +90 días (120 días al 2025-03-01)
       F-PAG  vence 2025-01-01  saldo=0    estado=pagada → no debe aparecer
     """
@@ -33,7 +33,7 @@ def seed_cxc(db_connection, seed_base, seed_terceros):
         (901, 901, 901, 'F-VIG', '2025-01-10', '2025-03-15', 'activa',  500.00, 500.00),
         (902, 901, 901, 'F-030', '2025-01-10', '2025-02-10', 'activa',  200.00, 200.00),
         (903, 901, 901, 'F-060', '2025-01-10', '2025-01-20', 'activa',  300.00, 300.00),
-        (904, 901, 901, 'F-090', '2024-12-01', '2024-12-31', 'vencida', 400.00, 400.00),
+        (904, 901, 901, 'F-090', '2024-12-01', '2024-12-30', 'vencida', 400.00, 400.00),
         (905, 901, 901, 'F-MAS', '2024-10-01', '2024-11-01', 'vencida', 100.00, 100.00),
         (906, 901, 901, 'F-PAG', '2025-01-01', '2025-02-01', 'pagada',  999.00, 0.00),
     ]
@@ -75,7 +75,7 @@ class TestCuentasPorCobrar:
     def _run(self, db_connection):
         return ejecutar_reporte(
             db_connection, "cuentas_por_cobrar.sql",
-            (self.FECHA_CORTE,) * 6 + (self.FECHA_CORTE,)
+            (self.FECHA_CORTE,) * 6
         )
 
     def test_excluye_facturas_pagadas(self, db_connection, seed_cxc):
@@ -108,7 +108,7 @@ class TestCuentasPorCobrar:
         assert por_numero["F-060"]["rango_antiguedad"] == "31-60"
 
     def test_rango_61_90(self, db_connection, seed_cxc):
-        """F-090 vence 2024-12-31 → 60 días vencida al corte → '61-90'."""
+        """F-090 vence 2024-12-30 → 61 días vencida al corte → '61-90'."""
         resultado = self._run(db_connection)
         por_numero = {r["numero"]: r for r in resultado}
         assert por_numero["F-090"]["rango_antiguedad"] == "61-90"
