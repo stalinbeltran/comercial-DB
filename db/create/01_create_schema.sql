@@ -15,7 +15,7 @@ CREATE DATABASE IF NOT EXISTS comercial_db
 USE comercial_db;
 
 -- =============================================================================
--- MÓDULO: ORGANIZACIÓN
+-- MODULO: ORGANIZACION
 -- =============================================================================
 
 CREATE TABLE empresas (
@@ -123,7 +123,7 @@ CREATE TABLE empleados (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: PRODUCTOS E INVENTARIO
+-- MODULO: PRODUCTOS E INVENTARIO
 -- =============================================================================
 
 CREATE TABLE unidades_medida (
@@ -248,7 +248,7 @@ CREATE TABLE movimientos_inventario (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: TERCEROS (clientes y proveedores unificados)
+-- MODULO: TERCEROS (clientes y proveedores unificados)
 -- =============================================================================
 
 CREATE TABLE tipos_identificacion (
@@ -330,7 +330,7 @@ CREATE TABLE direcciones (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: SEGURIDAD
+-- MODULO: SEGURIDAD
 -- =============================================================================
 
 CREATE TABLE usuarios (
@@ -422,7 +422,7 @@ CREATE TABLE parametros (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: COMPRAS
+-- MODULO: COMPRAS
 -- =============================================================================
 
 CREATE TABLE ordenes_compra (
@@ -523,7 +523,7 @@ CREATE TABLE recepciones_detalle (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: VENTAS
+-- MODULO: VENTAS
 -- =============================================================================
 
 CREATE TABLE listas_precios (
@@ -708,7 +708,7 @@ CREATE TABLE notas_credito_detalle (
 ) ENGINE=InnoDB;
 
 -- =============================================================================
--- MÓDULO: TESORERÍA
+-- MODULO: TESORERIA
 -- =============================================================================
 
 CREATE TABLE formas_pago (
