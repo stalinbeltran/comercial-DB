@@ -760,6 +760,19 @@ def main():
     conn.autocommit = False
     cur = conn.cursor()
 
+    # Verificar que la DB esté vacía; si no, abortar con mensaje claro
+    cur.execute("SELECT COUNT(*) FROM tipos_identificacion")
+    (n,) = cur.fetchone()
+    if n > 0:
+        cur.close()
+        conn.close()
+        print(
+            f"Error: '{db}' no está vacía ({n} fila(s) en tipos_identificacion).\n"
+            "Ejecuta primero:  py scripts/clear_db.py --yes",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
     try:
         cat = seed_catalogos(cur)
         org = seed_organizacion(cur)
