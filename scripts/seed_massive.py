@@ -419,20 +419,22 @@ def seed_compras(cur, pd, ter, org, next_mov_id):
             if fecha_rec > D_FIN:
                 fecha_rec = D_FIN
             est_rec = "parcial" if parcial else "completa"
-            rec_rows.append((rec_id, oc_id, bod_id,
-                             gen_num_doc("REC", rec_id), str(fecha_rec), est_rec))
+            cur_rec_id = rec_id
+            rec_rows.append((cur_rec_id, oc_id, bod_id,
+                             gen_num_doc("REC", cur_rec_id), str(fecha_rec), est_rec))
+            rec_id += 1
 
             for lin in lineas_oc:
                 ocd_lid, _, pid, pres_id, qty_esp, _, _, _, _, _ = lin
                 qty_rec = r2(qty_esp * random.uniform(0.5, 0.9)) if parcial else qty_esp
                 costo   = costo_by[pid]
-                recd_rows.append((recd_id, rec_id, ocd_lid, pid, pres_id, qty_esp, qty_rec, costo))
+                recd_rows.append((recd_id, cur_rec_id, ocd_lid, pid, pres_id, qty_esp, qty_rec, costo))
                 recd_id += 1
 
                 # Movimiento inventario entrada por recepción
                 mov_rows.append((mid, pid, pres_id, bod_id,
                                  "entrada", qty_rec, 0.0, qty_rec, costo,
-                                 rec_id, "recepcion", None))
+                                 cur_rec_id, "recepcion", None))
                 mid += 1
 
             # Pago proveedor (70% de las OC recibidas)
@@ -501,6 +503,7 @@ def seed_ventas(cur, pd, ter, org, next_mov_id):
     fac_rows  = []
     facd_rows = []
     mov_rows  = []
+    fac_id_counter = 0
     facd_id   = 1
     mid       = next_mov_id
 
@@ -508,12 +511,13 @@ def seed_ventas(cur, pd, ter, org, next_mov_id):
     suc_weights = [47, 48, 5]
 
     def _gen_fac_rows(count, fecha_gen_fn, suc_wts=None):
-        nonlocal facd_id, mid
+        nonlocal facd_id, mid, fac_id_counter
         rows = []
         d_rows = []
         m_rows = []
         for i in range(count):
-            fac_id  = len(fac_rows) + len(rows) + 1
+            fac_id_counter += 1
+            fac_id  = fac_id_counter
             suc_id  = random.choices(suc_ids, weights=suc_wts or [1]*len(suc_ids))[0]
             bod_id  = suc_bods[suc_id][0]
             cli_id  = random.choice(cli_ids)
