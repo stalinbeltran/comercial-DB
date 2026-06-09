@@ -35,6 +35,23 @@ SOURCE db/create/01_create_schema.sql;
 
 ## Scripts Python
 
+### Crear o actualizar el esquema (create_schema)
+
+```powershell
+# Crea comercial_db_test (desde .env) y aplica todas las tablas
+py scripts/create_schema.py
+
+# Apuntar a otra DB (p. ej. desarrollo)
+$env:DB_NAME="comercial_db"; py scripts/create_schema.py
+```
+
+Lee `DB_NAME` de `.env`, crea la base de datos si no existe y ejecuta `db/create/01_create_schema.sql`
+ignorando las líneas `CREATE DATABASE` / `USE` hardcodeadas. Agrega `IF NOT EXISTS` a cada
+`CREATE TABLE`, por lo que **re-ejecutar es seguro** aunque las tablas ya existan.
+Usa `FOREIGN_KEY_CHECKS=0` internamente para evitar colisiones de nombres de constraint en MariaDB.
+
+---
+
 ### Limpiar toda la base de datos
 
 ```powershell
